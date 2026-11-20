@@ -1,0 +1,38 @@
+================================================================================
+WEEK 5 - QUALITY LAB : BEFORE REFACTORING
+Captured from week5/ (Python 3.12, ruff 0.17.6, pylint 4.1.4, pytest 9.2.0)
+Target file: week5/legacy_fees.py (original, unmodified)
+================================================================================
+
+$ python -m pytest test_grades.py -q
+.....                                                                    [100%]
+5 passed in 0.02s
+
+
+$ python -m ruff check legacy_fees.py --output-format=concise
+legacy_fees.py:1:5: C901 `make_invoice` is too complex (6 > 5)
+Found 1 error.
+
+
+$ python -m pylint legacy_fees.py
+*************** Module legacy_fees
+legacy_fees.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+legacy_fees.py:1:0: C0116: Missing function or method docstring (missing-function-docstring)
+legacy_fees.py:14:8: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+legacy_fees.py:14:8: R1732: Consider using 'with' for resource-allocating operations (consider-using-with)
+
+-----------------------------------
+Your code has been rated at 7.78/10
+
+
+$ python -m ruff check --select C901 --config "lint.mccabe.max-complexity=1" legacy_fees.py
+C901 `make_invoice` is too complex (6 > 1)
+ --> legacy_fees.py:1:5
+  |
+1 | def make_invoice(student, kind):
+  |     ^^^^^^^^^^^^
+2 |     total = 0
+3 |     for code in student.courses:
+  |
+
+Found 1 error.
